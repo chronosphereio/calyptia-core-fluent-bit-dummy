@@ -7,12 +7,12 @@ builds:
     - -buildmode=c-shared
     - -trimpath
     - -v
-    binary: lib-enterprise-plugin-template.so
+    binary: lib-enterprise-plugin-dummy.so
     goos:
       - linux
     goarch:
       - amd64
-      - arm64
+      # - arm64
 archives:
   - format: tar.gz
     files:
