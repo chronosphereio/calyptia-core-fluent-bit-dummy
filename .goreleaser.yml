@@ -1,0 +1,25 @@
+env: []
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - flags:
+    - -buildmode=c-shared
+    - -trimpath
+    - -v
+    binary: lib-enterprise-plugin-template.so
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+archives:
+  - format: tar.gz
+    files:
+      - LICENSE.txt
+      - README.md
+sboms:
+  - artifacts: archive
+signs:
+  - artifacts: checksum
+    args: ["--batch", "-u", "{{ .Env.GPG_FINGERPRINT }}", "--output", "${signature}", "--detach-sign", "${artifact}"]
