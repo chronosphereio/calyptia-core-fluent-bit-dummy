@@ -7,7 +7,7 @@ builds:
     - -buildmode=c-shared
     - -trimpath
     - -v
-    binary: lib-enterprise-plugin-dummy.so
+    binary: lib-lts-advanced-plugin-dummy.so
     goos:
       - linux
     goarch:
