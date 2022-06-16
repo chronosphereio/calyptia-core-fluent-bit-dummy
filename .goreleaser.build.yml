@@ -1,0 +1,37 @@
+env:
+  - GO111MODULE=on
+  - CGO_ENABLED=1
+before:
+  hooks:
+    - go mod tidy
+builds:
+  - id: linux-amd64
+    binary: lib-lts-advanced-plugin-dummy.so
+    env:
+      - CC=x86_64-linux-gnu-gcc
+      - CXX=x86_64-linux-gnu-g++
+    goarch:
+      - amd64
+    goos:
+      - linux
+    flags:
+      - -buildmode=c-shared
+      - -trimpath
+      - -v
+
+  - id: linux-arm64
+    binary: lib-lts-advanced-plugin-dummy.so
+    env:
+      - CC=aarch64-linux-gnu-gcc
+      - CXX=aarch64-linux-gnu-g++
+    goarch:
+      - arm64
+    goos:
+      - linux
+    flags:
+      - -buildmode=c-shared
+      - -trimpath
+      - -v
+
+release:
+  disable: true
