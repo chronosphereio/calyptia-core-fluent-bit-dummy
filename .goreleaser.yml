@@ -1,20 +1,31 @@
-env: []
-before:
-  hooks:
-    - go mod tidy
 builds:
-  - flags:
-    - -buildmode=c-shared
-    - -trimpath
-    - -v
-    binary: lib-lts-advanced-plugin-dummy.so
+  - id: linux-amd64
+    builder: prebuilt
     goos:
       - linux
     goarch:
       - amd64
-      # - arm64
+    goamd64: [ 'v1' ]
+    prebuilt:
+      path: ./build/{{ .Arch }}/lts-advanced-plugin-dummy.so
+    binary: lib-lts-advanced-plugin-dummy.so
+
+  - id: linux-arm64
+    builder: prebuilt
+    goos:
+      - linux
+    goarch:
+      - arm64
+    prebuilt:
+      path: ./build/{{ .Arch }}/lts-advanced-plugin-dummy.so
+    binary: lib-lts-advanced-plugin-dummy.so
+
 archives:
-  - format: tar.gz
+  - id: linux
+    allow_different_binary_count: true
+    builds:
+      - linux-amd64
+      - linux-arm64
     files:
       - LICENSE.txt
       - README.md
