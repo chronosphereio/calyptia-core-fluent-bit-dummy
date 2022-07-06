@@ -1,64 +1,59 @@
 package main
 
-/*
-#include <stdlib.h>
-*/
-import "C"
 import (
-	"fmt"
+	"context"
+	"errors"
 	"time"
-	"unsafe"
 
-	"github.com/fluent/fluent-bit-go/input"
+	"github.com/calyptia/plugin"
+	"github.com/calyptia/plugin/metric"
 )
 
-//export FLBPluginRegister
-func FLBPluginRegister(def unsafe.Pointer) int {
-	return input.FLBPluginRegister(def, "gdummy", "dummy golang")
+func init() {
+	plugin.RegisterInput("gdummy", "dummy GO!", &gdummyPlugin{})
 }
 
-//export FLBPluginInit
-// (fluentbit will call this)
-// plugin (context) pointer to fluentbit context (state/ c code)
-func FLBPluginInit(plugin unsafe.Pointer) int {
-	// Example to retrieve an optional configuration parameter
-	param := input.FLBPluginConfigKey(plugin, "param")
-	fmt.Printf("[flb-go] plugin parameter = '%s'\n", param)
-	return input.FLB_OK
+type gdummyPlugin struct {
+	counterSuccess metric.Counter
+	counterFailure metric.Counter
+	log            plugin.Logger
 }
 
-//export FLBPluginInputCallback
-func FLBPluginInputCallback(data *unsafe.Pointer, size *C.size_t) int {
-	now := time.Now()
-	flb_time := input.FLBTime{now}
-	message := map[string]string{"message": "dummy"}
+func (plug *gdummyPlugin) Init(ctx context.Context, fbit *plugin.Fluentbit) error {
+	plug.counterSuccess = fbit.Metrics.NewCounter("operation_succeeded_total", "Total number of succeeded operations", "gdummy")
+	plug.counterFailure = fbit.Metrics.NewCounter("operation_failed_total", "Total number of failed operations", "gdummy")
+	plug.log = fbit.Logger
 
-	entry := []interface{}{flb_time, message}
+	return nil
+}
 
-	enc := input.NewEncoder()
-	packed, err := enc.Encode(entry)
-	if err != nil {
-		fmt.Println("Cannot convert to msgpack:", message, err)
-		return input.FLB_ERROR
+func (plug gdummyPlugin) Collect(ctx context.Context, ch chan<- plugin.Message) error {
+	tick := time.NewTicker(time.Second)
+
+	for {
+		select {
+		case <-ctx.Done():
+			err := ctx.Err()
+			if err != nil && !errors.Is(err, context.Canceled) {
+				plug.counterFailure.Add(1)
+				plug.log.Error("[gdummy] operation failed")
+
+				return err
+			}
+
+			return nil
+		case <-tick.C:
+			plug.counterSuccess.Add(1)
+			plug.log.Debug("[gdummy] operation succeeded")
+
+			ch <- plugin.Message{
+				Time: time.Now(),
+				Record: map[string]string{
+					"message": "dummy",
+				},
+			}
+		}
 	}
-
-	length := len(packed)
-	*data = C.CBytes(packed)
-	*size = C.size_t(length)
-	// For emitting interval adjustment.
-	time.Sleep(1000 * time.Millisecond)
-
-	return input.FLB_OK
-}
-
-//export FLBPluginInputCleanupCallback
-func FLBPluginInputCleanupCallback(data unsafe.Pointer) int {
-	return input.FLB_OK
-}
-
-//export FLBPluginExit
-func FLBPluginExit() int {
-	return input.FLB_OK
 }
 
 func main() {
