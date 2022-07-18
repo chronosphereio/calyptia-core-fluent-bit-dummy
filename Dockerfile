@@ -1,4 +1,4 @@
-FROM golang:1.18.3 as build
+FROM golang:1.18.4 as build
 
 # Install certificates
 # hadolint ignore=DL3008,DL3015
