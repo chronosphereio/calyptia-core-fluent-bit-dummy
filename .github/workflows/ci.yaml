@@ -15,6 +15,8 @@ jobs:
       contents: write
       packages: read
     runs-on: ubuntu-latest
+    env:
+      goreleaser-flags: ""
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -76,23 +78,21 @@ jobs:
           GORELEASER_IMAGE: ghcr.io/calyptia/lts-advanced-plugin-template/goreleaser-cross:latest
           GORELEASER_SNAPSHOT: ${{ github.event_name == 'pull_request' }}
 
-      - name: Run GoReleaser on PR
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: goreleaser/goreleaser-action@v4
-        with:
-          version: latest
-          distribution: goreleaser-pro
-          args: release --skip-publish --skip-sign --skip-sbom --skip-validate --rm-dist --snapshot
-        env:
-          GORELEASER_KEY: ${{ secrets.GORELEASER_PRO_KEY }}
+      # Note snapshot removal in v4: https://github.com/caarlos0/goreleaser-action-v4-auto-snapshot-example
+      - name: Set up snapshot build
+        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
+        run: echo "goreleaser-flags=--snapshot" >> $GITHUB_ENV
 
-      - name: Run GoReleaser
-        if: ${{ github.event_name != 'pull_request' }}
+      - name: Set up PR build
+        if: ${{ github.event_name == 'pull_request' }}
+        run: echo "goreleaser-flags=--skip-publish --skip-sign --skip-sbom --snapshot" >> $GITHUB_ENV
+
+      - name: Run GoReleaser with flags
         uses: goreleaser/goreleaser-action@v4
         with:
           version: latest
           distribution: goreleaser-pro
-          args: release --skip-validate --rm-dist
+          args: release --skip-validate --rm-dist ${{ env.goreleaser-flags }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
