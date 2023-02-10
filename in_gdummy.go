@@ -20,8 +20,8 @@ type gdummyPlugin struct {
 }
 
 func (plug *gdummyPlugin) Init(ctx context.Context, fbit *plugin.Fluentbit) error {
-	plug.counterSuccess = fbit.Metrics.NewCounter("operation_succeeded_total", "Total number of succeeded operations", "gdummy")
-	plug.counterFailure = fbit.Metrics.NewCounter("operation_failed_total", "Total number of failed operations", "gdummy")
+	//plug.counterSuccess = fbit.Metrics.NewCounter("operation_succeeded_total", "Total number of succeeded operations", "gdummy")
+	//plug.counterFailure = fbit.Metrics.NewCounter("operation_failed_total", "Total number of failed operations", "gdummy")
 	plug.log = fbit.Logger
 
 	return nil
@@ -43,7 +43,7 @@ func (plug gdummyPlugin) Collect(ctx context.Context, ch chan<- plugin.Message) 
 
 			return nil
 		case <-tick.C:
-			plug.counterSuccess.Add(1)
+			//plug.counterSuccess.Add(1)
 			plug.log.Debug("[gdummy] operation succeeded")
 
 			ch <- plugin.Message{
