@@ -35,8 +35,8 @@ jobs:
           curl -L https://github.com/calyptia/cmetrics/releases/download/${CMETRICS_RELEASE}/cmetrics_${CMETRICS_VERSION}_${ARCH}.deb --output cmetrics_${CMETRICS_VERSION}_${ARCH}.deb
           sudo dpkg -i *.deb
         env:
-          CMETRICS_VERSION: "0.3.3"
-          CMETRICS_RELEASE: "v0.3.3"
+          CMETRICS_VERSION: "0.5.8"
+          CMETRICS_RELEASE: "v0.5.8"
           ARCH: "amd64"
 
       - name: Set up Go
