@@ -38,6 +38,6 @@ $(BUILD_DOCKER_ARCHS): build-%:
 		--output=./build/$*/$(PACKAGE_BINARY_NAME) \
 		--id=linux-$* \
 		--single-target \
-		--rm-dist \
+		--clean \
 		--skip-validate \
 		$(GORELEASER_EXTRA_FLAGS)

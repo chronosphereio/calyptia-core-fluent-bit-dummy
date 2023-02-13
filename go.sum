@@ -117,10 +117,11 @@ github.com/boltdb/bolt v1.3.1/go.mod h1:clJnj/oiGkjum5o1McbSZDSLxVThjynRyGBgiAx2
 github.com/bonitoo-io/go-sql-bigquery v0.3.4-1.4.0/go.mod h1:J4Y6YJm0qTWB9aFziB7cPeSyc6dOZFyJdteSeybVpXQ=
 github.com/c-bata/go-prompt v0.2.2/go.mod h1:VzqtzE2ksDBcdln8G7mk2RX9QyGjH+OVqOCSiVIqS34=
 github.com/cactus/go-statsd-client/statsd v0.0.0-20191106001114-12b4e2b38748/go.mod h1:l/bIBLeOl9eX+wxJAzxS4TveKRtAqlyDpHjhkfO0MEI=
-github.com/calyptia/cmetrics-go v0.1.6 h1:sFcYX9TLQw33tBO502NzaOKMkP9RS2rhV1SoS2V8Q0M=
 github.com/calyptia/cmetrics-go v0.1.6/go.mod h1:K1IEPgICDtD4mJW7RVhfG4BkCywnjCdYZwbKs0jSw/U=
-github.com/calyptia/plugin v0.1.4 h1:wneEDN1Ohm3ke/Ic+gliZ6eS3nNU2TtL6TRBGyG1r88=
-github.com/calyptia/plugin v0.1.4/go.mod h1:ReuBnj8mVhVoO2AAEHsgXf+bdwboPCkDvltUyT7P2HY=
+github.com/calyptia/cmetrics-go v0.1.7 h1:A4kEFuFqVuWzytIbbey9KivHi0GQVjOkE2JJkdRbQ2U=
+github.com/calyptia/cmetrics-go v0.1.7/go.mod h1:K1IEPgICDtD4mJW7RVhfG4BkCywnjCdYZwbKs0jSw/U=
+github.com/calyptia/plugin v0.1.6 h1:DfkyG+K2u8prIQw6pdNhfbpL/wNGkx6c6qOwEer/PcE=
+github.com/calyptia/plugin v0.1.6/go.mod h1:ReuBnj8mVhVoO2AAEHsgXf+bdwboPCkDvltUyT7P2HY=
 github.com/casbin/casbin/v2 v2.1.2/go.mod h1:YcPU1XXisHhLzuxH9coDNf2FbKpjGlbCg3n9yuLkIJQ=
 github.com/cenkalti/backoff v0.0.0-20181003080854-62661b46c409/go.mod h1:90ReRw6GdpyfrHakVjL/QHaoyV4aDUVVkXQJJJ3NXXM=
 github.com/cenkalti/backoff v2.2.1+incompatible h1:tNowT99t7UNflLxfYYSlKYsBpXdEet03Pg2g16Swow4=

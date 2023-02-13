@@ -35,8 +35,8 @@ jobs:
           curl -L https://github.com/calyptia/cmetrics/releases/download/${CMETRICS_RELEASE}/cmetrics_${CMETRICS_VERSION}_${ARCH}.deb --output cmetrics_${CMETRICS_VERSION}_${ARCH}.deb
           sudo dpkg -i *.deb
         env:
-          CMETRICS_VERSION: "0.3.3"
-          CMETRICS_RELEASE: "v0.3.3"
+          CMETRICS_VERSION: "0.5.8"
+          CMETRICS_RELEASE: "v0.5.8"
           ARCH: "amd64"
 
       - name: Set up Go
@@ -77,7 +77,9 @@ jobs:
 
       - name: Build artefacts on top of cross compile image.
         run: |
-          make build
+          make build-amd64
+          sudo rm -rf go
+          make build-arm64
         shell: bash
         env:
           GORELEASER_IMAGE: ghcr.io/calyptia/lts-advanced-plugin-template/goreleaser-cross:latest
