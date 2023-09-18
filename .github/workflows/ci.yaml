@@ -27,7 +27,7 @@ jobs:
       - run: git fetch --force --tags
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v3
 
       - name: Install cmetrics library
         run: |
