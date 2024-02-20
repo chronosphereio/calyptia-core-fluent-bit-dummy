@@ -1,6 +1,6 @@
 module github.com/calyptia/enterprise-plugin-dummy
 
-go 1.22
+go 1.17
 
 require github.com/calyptia/plugin v0.1.7
 
