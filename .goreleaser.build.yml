@@ -6,7 +6,7 @@ before:
     - go mod tidy
 builds:
   - id: linux-amd64
-    binary: lib-lts-advanced-plugin-dummy.so
+    binary: lib-calyptia-core-fluent-bit-dummy.so
     env:
       - CC=x86_64-linux-gnu-gcc
       - CXX=x86_64-linux-gnu-g++
@@ -20,7 +20,7 @@ builds:
       - -v
 
   - id: linux-arm64
-    binary: lib-lts-advanced-plugin-dummy.so
+    binary: lib-calyptia-core-fluent-bit-dummy.so
     env:
       - CC=aarch64-linux-gnu-gcc
       - CXX=aarch64-linux-gnu-g++

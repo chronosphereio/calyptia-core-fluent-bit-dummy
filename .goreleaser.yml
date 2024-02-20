@@ -7,8 +7,8 @@ builds:
       - amd64
     goamd64: [ 'v1' ]
     prebuilt:
-      path: ./build/{{ .Arch }}/lts-advanced-plugin-dummy.so
-    binary: lib-lts-advanced-plugin-dummy.so
+      path: ./build/{{ .Arch }}/calyptia-core-fluent-bit-dummy.so
+    binary: lib-calyptia-core-fluent-bit-dummy.so
 
   - id: linux-arm64
     builder: prebuilt
@@ -17,8 +17,8 @@ builds:
     goarch:
       - arm64
     prebuilt:
-      path: ./build/{{ .Arch }}/lts-advanced-plugin-dummy.so
-    binary: lib-lts-advanced-plugin-dummy.so
+      path: ./build/{{ .Arch }}/calyptia-core-fluent-bit-dummy.so
+    binary: lib-calyptia-core-fluent-bit-dummy.so
 
 archives:
   - id: linux
