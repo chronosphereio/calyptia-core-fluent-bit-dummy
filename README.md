@@ -2,26 +2,26 @@
 
 A Calyptia Enterprise plugin providing dummy input.
 
-The canonical source of this repository including all copyright and licensing information is here: https://github.com/calyptia/enterprise-plugin-dummy
+The canonical source of this repository including all copyright and licensing information is here: github.com/chronosphereio/calyptia-core-fluent-bit-dummy
 
 The following example code implements an input plugin that works with separated input collecting threads that is introduced in Fluent Bit 1.9.
 It describes how to share context from the specified instance configuration to the input callback.
 
 Every output plugin go through four callbacks associated to different phases:
 
-| Plugin Phase           | Callback                        |
-|------------------------|---------------------------------|
-| Registration           | FLBPluginRegister()             |
-| Initialization         | FLBPluginInit()                 |
-| Input Callback         | FLBPluginInputCallback()        |
-| Exit                   | FLBPluginExit()                 |
+| Plugin Phase   | Callback                 |
+| -------------- | ------------------------ |
+| Registration   | FLBPluginRegister()      |
+| Initialization | FLBPluginInit()          |
+| Input Callback | FLBPluginInputCallback() |
+| Exit           | FLBPluginExit()          |
 
 And _Input Cleanup Callback_ is optional.
 
 This callback is called right after _Input Callback_.
 
 | Plugin Phase           | Callback                        |
-|------------------------|---------------------------------|
+| ---------------------- | ------------------------------- |
 | Input Cleanup Callback | FLBPluginInputCleanupCallback() |
 
 ## Plugin Registration
@@ -47,7 +47,7 @@ func FLBPluginInit(ctx unsafe.Pointer) int {
 }
 ```
 
-The function must return FLB\_OK when it initialized properly or FLB\_ERROR if something went wrong. If the plugin reports an error, the engine will _not_ load the instance.
+The function must return FLB_OK when it initialized properly or FLB_ERROR if something went wrong. If the plugin reports an error, the engine will _not_ load the instance.
 
 ## Input Callback
 
@@ -98,12 +98,11 @@ func FLBPluginInputCleanupCallback(data unsafe.Pointer) int {
 
 When done, there are three returning values available:
 
-| Return value  | Description                                    |
-|---------------|------------------------------------------------|
-| FLB\_OK       | The data have been processed normally.         |
-| FLB\_ERROR    | An internal error have ocurred, the plugin will not handle the set of records/data again. |
-| FLB\_RETRY    | A recoverable error have ocurred, the engine can try to flush the records/data later.|
-
+| Return value | Description                                                                               |
+| ------------ | ----------------------------------------------------------------------------------------- |
+| FLB_OK       | The data have been processed normally.                                                    |
+| FLB_ERROR    | An internal error have ocurred, the plugin will not handle the set of records/data again. |
+| FLB_RETRY    | A recoverable error have ocurred, the engine can try to flush the records/data later.     |
 
 ## Plugin Exit
 

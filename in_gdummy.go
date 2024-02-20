@@ -1,3 +1,6 @@
+// This package provides a sample input plugin for fluent-bit.
+// It makes use for metrics counters and logging.
+// It sends a dummy message every second.
 package main
 
 import (
@@ -19,7 +22,7 @@ type gdummyPlugin struct {
 	log            plugin.Logger
 }
 
-func (plug *gdummyPlugin) Init(ctx context.Context, fbit *plugin.Fluentbit) error {
+func (plug *gdummyPlugin) Init(_ context.Context, fbit *plugin.Fluentbit) error {
 	plug.counterSuccess = fbit.Metrics.NewCounter("operation_succeeded_total", "Total number of succeeded operations", "gdummy")
 	plug.counterFailure = fbit.Metrics.NewCounter("operation_failed_total", "Total number of failed operations", "gdummy")
 	plug.log = fbit.Logger
