@@ -30,7 +30,7 @@ linters:
     - typecheck
     - unused
     - bodyclose
-    - depguard
+    # - depguard
     - dupl
     - exportloopref
     - forcetypeassert

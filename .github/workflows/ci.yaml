@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     tags:
-      - 'v*'
+      - "v*"
   pull_request:
   workflow_dispatch:
 
@@ -35,14 +35,14 @@ jobs:
           curl -L https://github.com/fluent/cmetrics/releases/download/${CMETRICS_RELEASE}/cmetrics_${CMETRICS_VERSION}_${ARCH}.deb --output cmetrics_${CMETRICS_VERSION}_${ARCH}.deb
           sudo dpkg -i *.deb
         env:
-          CMETRICS_VERSION: "0.5.8"
-          CMETRICS_RELEASE: "v0.5.8"
+          CMETRICS_VERSION: "0.6.0"
+          CMETRICS_RELEASE: "v0.6.0"
           ARCH: "amd64"
 
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.21'
+          go-version: "1.22"
 
       - name: Cache Go modules
         uses: actions/cache@v4
@@ -98,7 +98,7 @@ jobs:
         with:
           version: latest
           distribution: goreleaser-pro
-          args: release --skip-validate --rm-dist ${{ env.goreleaser-flags }}
+          args: release --skip=validate --rm-dist ${{ env.goreleaser-flags }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
