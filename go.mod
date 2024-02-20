@@ -1,4 +1,4 @@
-module github.com/calyptia/enterprise-plugin-dummy
+module github.com/chronosphereio/calyptia-core-fluent-bit-dummy
 
 go 1.21.0
 
