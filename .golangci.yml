@@ -1,6 +1,6 @@
 linters-settings:
   goimports:
-    local-prefixes: github.com/calyptia/calyptia-core-fluent-bit-dummy
+    local-prefixes: github.com/chronosphereio/calyptia-core-fluent-bit-dummy
     min-confidence: 0.8
   gocyclo:
     min-complexity: 15
