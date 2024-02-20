@@ -31,8 +31,8 @@ jobs:
 
       - name: Install cmetrics library
         run: |
-          curl -L https://github.com/calyptia/cmetrics/releases/download/${CMETRICS_RELEASE}/cmetrics_${CMETRICS_VERSION}_${ARCH}-headers.deb  --output cmetrics_${CMETRICS_VERSION}_${ARCH}-headers.deb
-          curl -L https://github.com/calyptia/cmetrics/releases/download/${CMETRICS_RELEASE}/cmetrics_${CMETRICS_VERSION}_${ARCH}.deb --output cmetrics_${CMETRICS_VERSION}_${ARCH}.deb
+          curl -L https://github.com/fluent/cmetrics/releases/download/${CMETRICS_RELEASE}/cmetrics_${CMETRICS_VERSION}_${ARCH}-headers.deb  --output cmetrics_${CMETRICS_VERSION}_${ARCH}-headers.deb
+          curl -L https://github.com/fluent/cmetrics/releases/download/${CMETRICS_RELEASE}/cmetrics_${CMETRICS_VERSION}_${ARCH}.deb --output cmetrics_${CMETRICS_VERSION}_${ARCH}.deb
           sudo dpkg -i *.deb
         env:
           CMETRICS_VERSION: "0.5.8"
