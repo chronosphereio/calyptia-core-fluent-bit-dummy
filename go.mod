@@ -2,7 +2,10 @@ module github.com/chronosphereio/calyptia-core-fluent-bit-dummy
 
 go 1.22.0
 
-require github.com/calyptia/plugin v1.1.3
+require (
+	github.com/brianvoe/gofakeit v3.18.0+incompatible
+	github.com/calyptia/plugin v1.1.3
+)
 
 require (
 	github.com/calyptia/cmetrics-go v0.1.7 // indirect

@@ -31,5 +31,5 @@ $(BUILD_DOCKER_ARCHS): build-%:
 		--id=linux-$* \
 		--single-target \
 		--clean \
-		--skip-validate \
+		--skip=validate \
 		$(GORELEASER_EXTRA_FLAGS)
