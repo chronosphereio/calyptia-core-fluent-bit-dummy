@@ -1,4 +1,4 @@
-GORELEASER_IMAGE			?= ghcr.io/chronosphereio/calyptia-core-fluent-bit-template/goreleaser-cross:latest
+GORELEASER_IMAGE			?= gcr.io/chronosphereio/calyptia-core-fluent-bit-template/goreleaser-cross:latest
 GORELEASER_CONFIG			:= ./.goreleaser.build.yml
 GORELEASER_DEBUG			:= false
 GORELEASER_SNAPSHOT         ?= false
@@ -31,5 +31,5 @@ $(BUILD_DOCKER_ARCHS): build-%:
 		--id=linux-$* \
 		--single-target \
 		--clean \
-		--skip-validate \
+		--skip=validate \
 		$(GORELEASER_EXTRA_FLAGS)
