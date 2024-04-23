@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"crypto/internal/edwards25519/field"
 	"encoding/json"
 	"errors"
 	"fmt"
