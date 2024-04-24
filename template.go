@@ -64,8 +64,14 @@ type TemplateData struct {
 	NumberZeroToHundredThousand string
 	NumberZeroToMillion         string
 	IPAddress                   string
+	IPV4Address                 string
+	IPV6Address                 string
 	LocalIPAddress              string
+	LocalIPV4Address            string
+	LocalIPV6Address            string
 	RemoteIPAddress             string
+	RemoteIPV4Address           string
+	RemoteIPV6Address           string
 	Username                    string
 	HTTPMethod                  string
 	HTTPPath                    string
@@ -98,8 +104,14 @@ func (g *LogGenerator) Generate() (map[string]string, error) {
 		NumberZeroToHundredThousand: strconv.Itoa(gofakeit.Number(0, 100000)),
 		NumberZeroToMillion:         strconv.Itoa(gofakeit.Number(0, 1000000)),
 		IPAddress:                   gofakeit.IPv4Address(),
+		IPV4Address:                 gofakeit.IPv4Address(),
+		IPV6Address:                 gofakeit.IPv6Address(),
 		LocalIPAddress:              gofakeit.IPv4Address(),
+		LocalIPV4Address:            gofakeit.IPv4Address(),
+		LocalIPV6Address:            gofakeit.IPv6Address(),
 		RemoteIPAddress:             gofakeit.IPv4Address(),
+		RemoteIPV4Address:           gofakeit.IPv4Address(),
+		RemoteIPV6Address:           gofakeit.IPv6Address(),
 		Username:                    strings.ToLower(gofakeit.Username()),
 		HTTPMethod:                  gofakeit.HTTPMethod(),
 		HTTPPath:                    randResourceURI(),

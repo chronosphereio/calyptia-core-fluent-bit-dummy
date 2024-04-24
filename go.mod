@@ -6,6 +6,7 @@ require (
 	github.com/Masterminds/sprig/v3 v3.2.3
 	github.com/brianvoe/gofakeit v3.18.0+incompatible
 	github.com/calyptia/plugin v1.1.3
+	github.com/stretchr/testify v1.9.0
 )
 
 require (
@@ -28,9 +29,9 @@ require (
 	github.com/shopspring/decimal v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/spf13/cast v1.3.1 // indirect
-	github.com/stretchr/testify v1.9.0 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	golang.org/x/crypto v0.21.0 // indirect
 	golang.org/x/tools v0.19.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
+	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
