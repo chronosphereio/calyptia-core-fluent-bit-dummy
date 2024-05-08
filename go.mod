@@ -1,6 +1,6 @@
 module github.com/chronosphereio/calyptia-core-fluent-bit-dummy
 
-go 1.22.0
+go 1.22.2
 
 require github.com/calyptia/plugin v1.1.3
 
