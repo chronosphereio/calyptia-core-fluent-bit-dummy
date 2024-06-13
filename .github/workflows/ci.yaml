@@ -91,10 +91,10 @@ jobs:
 
       - name: Set up PR build
         if: ${{ github.event_name == 'pull_request' }}
-        run: echo "goreleaser-flags=--skip-publish --skip-sign --skip-sbom --snapshot" >> $GITHUB_ENV
+        run: echo "goreleaser-flags=--skip=publish,sign,sbom --snapshot" >> $GITHUB_ENV
 
       - name: Run GoReleaser with flags
-        uses: goreleaser/goreleaser-action@v4
+        uses: goreleaser/goreleaser-action@v6
         with:
           version: latest
           distribution: goreleaser-pro

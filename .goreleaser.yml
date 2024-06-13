@@ -5,7 +5,7 @@ builds:
       - linux
     goarch:
       - amd64
-    goamd64: [ 'v1' ]
+    goamd64: ["v1"]
     prebuilt:
       path: ./build/{{ .Arch }}/calyptia-core-fluent-bit-dummy.so
     binary: lib-calyptia-core-fluent-bit-dummy.so
@@ -33,4 +33,13 @@ sboms:
   - artifacts: archive
 signs:
   - artifacts: checksum
-    args: ["--batch", "-u", "{{ .Env.GPG_FINGERPRINT }}", "--output", "${signature}", "--detach-sign", "${artifact}"]
+    args:
+      [
+        "--batch",
+        "-u",
+        "{{ .Env.GPG_FINGERPRINT }}",
+        "--output",
+        "${signature}",
+        "--detach-sign",
+        "${artifact}",
+      ]
