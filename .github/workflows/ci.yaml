@@ -42,7 +42,7 @@ jobs:
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
-          go-version: "1.22.3"
+          go-version: "1.22.4"
 
       - name: Cache Go modules
         uses: actions/cache@v4
@@ -91,14 +91,14 @@ jobs:
 
       - name: Set up PR build
         if: ${{ github.event_name == 'pull_request' }}
-        run: echo "goreleaser-flags=--skip-publish --skip-sign --skip-sbom --snapshot" >> $GITHUB_ENV
+        run: echo "goreleaser-flags=--skip=publish,sign,sbom --snapshot" >> $GITHUB_ENV
 
       - name: Run GoReleaser with flags
-        uses: goreleaser/goreleaser-action@v4
+        uses: goreleaser/goreleaser-action@v6
         with:
           version: latest
           distribution: goreleaser-pro
-          args: release --skip=validate --rm-dist ${{ env.goreleaser-flags }}
+          args: release --skip=validate --clean ${{ env.goreleaser-flags }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GPG_FINGERPRINT: ${{ steps.import_gpg.outputs.fingerprint }}
