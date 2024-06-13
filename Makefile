@@ -26,10 +26,10 @@ $(BUILD_DOCKER_ARCHS): build-%:
 		-e HOME=/go/src/$(PACKAGE_NAME) \
 		$(GORELEASER_IMAGE) \
 		-f "$(GORELEASER_CONFIG)" \
-		--debug=$(GORELEASER_DEBUG) build \
+		--verbose=$(GORELEASER_DEBUG) build \
 		--output=./build/$*/$(PACKAGE_BINARY_NAME) \
 		--id=linux-$* \
 		--single-target \
 		--clean \
-		--skip-validate \
+		--skip=validate \
 		$(GORELEASER_EXTRA_FLAGS)
