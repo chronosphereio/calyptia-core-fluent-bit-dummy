@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
   hadolint-pr:
     runs-on: ubuntu-latest
     name: PR - Hadolint
@@ -32,11 +31,11 @@ jobs:
         shell: bash
 
   docslint-pr:
-      runs-on: ubuntu-latest
-      name: PR - Markdownlint
-      steps:
-        - name: Run markdownlint
-          uses: actionshub/markdownlint@v3.1.4
+    runs-on: ubuntu-latest
+    name: PR - Markdownlint
+    steps:
+      - name: Run markdownlint
+        uses: actionshub/markdownlint@v3.1.4
 
   golint-pr:
     runs-on: ubuntu-latest
@@ -50,8 +49,8 @@ jobs:
           curl -L https://github.com/fluent/cmetrics/releases/download/${CMETRICS_RELEASE}/cmetrics_${CMETRICS_VERSION}_${ARCH}.deb --output cmetrics_${CMETRICS_VERSION}_${ARCH}.deb
           sudo dpkg -i *.deb
         env:
-          CMETRICS_VERSION: "0.5.8"
-          CMETRICS_RELEASE: "v0.5.8"
+          CMETRICS_VERSION: "0.9.1"
+          CMETRICS_RELEASE: "v0.9.1"
           ARCH: "amd64"
 
       - name: golangci-lint

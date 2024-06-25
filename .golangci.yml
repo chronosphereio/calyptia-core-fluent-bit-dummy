@@ -1,11 +1,12 @@
 linters-settings:
   goimports:
     local-prefixes: github.com/chronosphereio/calyptia-core-fluent-bit-dummy
-    min-confidence: 0.8
+    confidence: 0.8
   gocyclo:
     min-complexity: 15
   govet:
-    check-shadowing: true
+    shadow:
+      strict: true
   misspell:
     locale: US
   nolintlint:
@@ -41,10 +42,10 @@ linters:
     - gocyclo
     - godot
     - gofumpt
-    - gomnd
     - goprintffuncname
     - gosec
     - misspell
+    - mnd
     - noctx
     - nolintlint
     - rowserrcheck
@@ -62,8 +63,8 @@ issues:
     - 'declaration of "(err|ctx)" shadows declaration at'
   exclude-rules:
     - linters:
-        - gomnd
+        - mnd
       text: "mnd: Magic number: 10"
     - linters:
-        - gomnd
+        - mnd
       text: "mnd: Magic number: 64"
