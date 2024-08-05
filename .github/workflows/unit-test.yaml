@@ -1,0 +1,46 @@
+name: Unit testing and code coverage
+
+on:
+  push:
+    branches:
+        - main
+  pull_request:
+
+jobs:
+    unit-test:
+        name: Go unit test and code coverage
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Install cmetrics library
+              run: |
+                curl -L https://github.com/fluent/cmetrics/releases/download/${CMETRICS_RELEASE}/cmetrics_${CMETRICS_VERSION}_${ARCH}-headers.deb  --output cmetrics_${CMETRICS_VERSION}_${ARCH}-headers.deb
+                curl -L https://github.com/fluent/cmetrics/releases/download/${CMETRICS_RELEASE}/cmetrics_${CMETRICS_VERSION}_${ARCH}.deb --output cmetrics_${CMETRICS_VERSION}_${ARCH}.deb
+                sudo dpkg -i *.deb
+              shell: bash
+              env:
+                CMETRICS_VERSION: "0.9.1"
+                CMETRICS_RELEASE: "v0.9.1"
+                ARCH: "amd64"
+
+            - name: setup-go
+              uses: actions/setup-go@v5
+              with:
+                go-version: "^1.22"
+
+            - name: Test
+              run: go test -v -race -cover -covermode=atomic -coverprofile=coverage.txt ./...
+              shell: bash
+
+            - name: Upload coverage to Codecov
+              uses: codecov/codecov-action@v4
+              with:
+                fail_ci_if_error: true
+                token: ${{ secrets.CODECOV_TOKEN }}
+                file: coverage.txt
+                flags: unittest
+                verbose: true
